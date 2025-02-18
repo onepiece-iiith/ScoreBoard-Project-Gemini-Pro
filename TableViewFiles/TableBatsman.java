@@ -1,14 +1,16 @@
 package TableViewFiles;
 
+import java.util.Objects;
+
 public class TableBatsman {
 
-    private String playerName;
-    private String outType;
-    private String batsmanRun;
-    private String ballPlayed;
-    private String fourRun;
-    private String sixRun;
-    private String strikeRate;
+    private final String playerName;
+    private final String outType;
+    private final String batsmanRun;
+    private final String ballPlayed;
+    private final String fourRun;
+    private final String sixRun;
+    private final String strikeRate;
 
     public TableBatsman(String playerName, String outType, String batsmanRun, String ballPlayed, String fourRun, String sixRun, String strikeRate) {
         this.playerName = playerName;
@@ -48,31 +50,16 @@ public class TableBatsman {
         return strikeRate;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TableBatsman that = (TableBatsman) o;
+        return Objects.equals(playerName, that.playerName) && Objects.equals(outType, that.outType) && Objects.equals(batsmanRun, that.batsmanRun) && Objects.equals(ballPlayed, that.ballPlayed) && Objects.equals(fourRun, that.fourRun) && Objects.equals(sixRun, that.sixRun) && Objects.equals(strikeRate, that.strikeRate);
     }
 
-    public void setOutType(String outType) {
-        this.outType = outType;
-    }
-
-    public void setBatsmanRun(String batsmanRun) {
-        this.batsmanRun = batsmanRun;
-    }
-
-    public void setBallPlayed(String ballPlayed) {
-        this.ballPlayed = ballPlayed;
-    }
-
-    public void setFourRun(String fourRun) {
-        this.fourRun = fourRun;
-    }
-
-    public void setSixRun(String sixRun) {
-        this.sixRun = sixRun;
-    }
- 
-    public void setStrikeRate(String strikeRate) {
-        this.strikeRate = strikeRate;
+    @Override
+    public int hashCode() {
+        return Objects.hash(playerName, outType, batsmanRun, ballPlayed, fourRun, sixRun, strikeRate);
     }
 }

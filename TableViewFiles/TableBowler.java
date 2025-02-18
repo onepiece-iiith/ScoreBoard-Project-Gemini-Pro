@@ -1,15 +1,17 @@
 package TableViewFiles;
 
+import java.util.Objects;
+
 public class TableBowler {
 
-    private String bowlerName;
-    private String bowlerOver;
-    private String maidenOver;
-    private String runGiven;
-    private String wicketTaken;
-    private String wideBall;
-    private String noBall;
-    private String economy;
+    private final String bowlerName;
+    private final String bowlerOver;
+    private final String maidenOver;
+    private final String runGiven;
+    private final String wicketTaken;
+    private final String wideBall;
+    private final String noBall;
+    private final String economy;
 
     public TableBowler(String bowlerName, String bowlerOver, String maidenOver, String runGiven, String wicketTaken, String wideBall, String noBall, String economy) {
         this.bowlerName = bowlerName;
@@ -26,63 +28,44 @@ public class TableBowler {
         return bowlerName;
     }
 
-    public void setBowlerName(String bowlerName) {
-        this.bowlerName = bowlerName;
-    }
-
     public String getBowlerOver() {
         return bowlerOver;
-    }
-
-    public void setBowlerOver(String bowlerOver) {
-        this.bowlerOver = bowlerOver;
     }
 
     public String getMaidenOver() {
         return maidenOver;
     }
 
-    public void setMaidenOver(String maidenOver) {
-        this.maidenOver = maidenOver;
-    }
-
     public String getRunGiven() {
         return runGiven;
-    }
-
-    public void setRunGiven(String runGiven) {
-        this.runGiven = runGiven;
     }
 
     public String getWicketTaken() {
         return wicketTaken;
     }
 
-    public void setWicketTaken(String wicketTaken) {
-        this.wicketTaken = wicketTaken;
-    }
-
     public String getWideBall() {
         return wideBall;
-    }
-
-    public void setWideBall(String wideBall) {
-        this.wideBall = wideBall;
     }
 
     public String getNoBall() {
         return noBall;
     }
 
-    public void setNoBall(String noBall) {
-        this.noBall = noBall;
-    }
-
     public String getEconomy() {
         return economy;
     }
 
-    public void setEconomy(String economy) {
-        this.economy = economy;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TableBowler that = (TableBowler) o;
+        return Objects.equals(bowlerName, that.bowlerName) && Objects.equals(bowlerOver, that.bowlerOver) && Objects.equals(maidenOver, that.maidenOver) && Objects.equals(runGiven, that.runGiven) && Objects.equals(wicketTaken, that.wicketTaken) && Objects.equals(wideBall, that.wideBall) && Objects.equals(noBall, that.noBall) && Objects.equals(economy, that.economy);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(bowlerName, bowlerOver, maidenOver, runGiven, wicketTaken, wideBall, noBall, economy);
     }
 }
