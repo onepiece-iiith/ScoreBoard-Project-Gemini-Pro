@@ -1,90 +1,53 @@
 package DatabaseFile;
 
-import javax.swing.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Scanner;
-
+import java.util.List;
 
 public class DatabaseNames {
-    private String saveNames;
 
-    public DatabaseNames(String saveNames){
+    private List<String> databaseNames;
 
-        this.saveNames = saveNames;
+    public DatabaseNames() {
+        databaseNames = new ArrayList<>();
+        loadDatabaseNames();
+    }
 
+    public void addDatabaseName(String databaseName) {
+        databaseNames.add(databaseName);
+        saveDatabaseNames();
+    }
+
+    public List<String> getDatabaseNames() {
+        return databaseNames;
+    }
+
+    private void loadDatabaseNames() {
         try {
-
-            FileWriter file = new FileWriter("/ScoreBoard/data/databaseNames.txt", true);
-            BufferedWriter buffer = new BufferedWriter(file);
-            PrintWriter output = new PrintWriter(buffer);
-
-
-            output.println(saveNames);
-
-            output.flush();
-
-            file.close();
-            buffer.close();
-            output.close();
-        }catch (Exception e){
-            e.printStackTrace();
+            List<String> names = Files.readAllLines(Paths.get("/ScoreBoard/data/databaseNames.txt"));
+            databaseNames = new ArrayList<>(names);
+        } catch (IOException e) {
+            // Handle exception appropriately, e.g., create an empty list or log the error
+            System.err.println("Error loading database names: " + e.getMessage());
+            databaseNames = new ArrayList<>();
         }
     }
 
-    public DatabaseNames(){
-
-    }
-
-    public String getSaveNames() {
-        return saveNames;
-    }
-
-    public String toString(){
-        return saveNames;
-    }
-
-    public ArrayList<String> getDatabaseNames() throws IOException {
-
-
-
-        File file = new File("/ScoreBoard/data/databaseNames.txt");
-
-        if(!file.exists()){
-            //JOptionPane.showMessageDialog(null,"Database Names file not found");
-            file.createNewFile();
+    private void saveDatabaseNames() {
+        try {
+            Files.write(Paths.get("/ScoreBoard/data/databaseNames.txt"), databaseNames);
+        } catch (IOException e) {
+            // Handle exception appropriately, e.g., log the error.
+            System.err.println("Error saving database names: " + e.getMessage());
         }
-        Scanner scan = new Scanner(file);
-        ArrayList<String> names = new ArrayList<>();
-
-        while(scan.hasNextLine()){
-            String dataName = scan.nextLine();
-            names.add(dataName);
-        }
-        return names;
-
-
-
-        //InputStream in = new FileInputStream("databaseNames.txt");        // work in compiler
-
-//        InputStream in = getClass().getResourceAsStream("/databaseNames.txt");
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-//
-//        ArrayList<String> names = new ArrayList<>();
-//
-//        String line;
-//        while ((line = reader.readLine())!=null) {
-//            String dataName = line;
-//            names.add(dataName);
-//        }
-//
-//        in.close();
-//        reader.close();
-//
-//
-//        return names;
-
     }
+
+
 
 }
-
